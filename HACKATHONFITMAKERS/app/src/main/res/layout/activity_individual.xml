@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/svIndividualRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="15dp">
+
+    <LinearLayout
+        android:id="@+id/llIndividualContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvIndividualTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="RUTINA"
+            android:textSize="28sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:layout_marginBottom="20dp"/>
+
+        <LinearLayout
+            android:id="@+id/llHeaderContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="#EEEEEE"
+            android:padding="10dp"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="25dp">
+
+            <LinearLayout
+                android:id="@+id/llDateContainer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvLabelToday"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="HOY"
+                    android:textSize="12sp"
+                    android:textColor="#555555"/>
+
+                <Spinner
+                    android:id="@+id/spinnerDays"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="48dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tvExercise1Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Sentadillas con peso"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+
+        <FrameLayout
+            android:id="@+id/flVideo1"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#DDDDDD"
+            android:layout_marginBottom="25dp">
+
+            <VideoView
+                android:id="@+id/videoEx1"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center" />
+
+            <ImageView
+                android:id="@+id/ivPlayIcon1"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@android:drawable/ic_media_play"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvExercise2Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Press Militar"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+
+        <FrameLayout
+            android:id="@+id/flVideo2"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#DDDDDD"
+            android:layout_marginBottom="25dp">
+
+            <VideoView
+                android:id="@+id/videoEx2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/ivPlayIcon2"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@android:drawable/ic_media_play"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+        <TextView
+            android:id="@+id/tvExercise3Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Zancadas"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="5dp"/>
+
+        <FrameLayout
+            android:id="@+id/flVideo3"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:background="#DDDDDD"
+            android:layout_marginBottom="20dp">
+
+            <VideoView
+                android:id="@+id/videoEx3"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"/>
+
+            <ImageView
+                android:id="@+id/ivPlayIcon3"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:src="@android:drawable/ic_media_play"
+                android:layout_gravity="center"/>
+        </FrameLayout>
+
+    </LinearLayout>
+</ScrollView>
