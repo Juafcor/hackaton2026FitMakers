@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/svRegisterRoot"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@android:color/white">
+
+    <LinearLayout
+        android:id="@+id/llRegisterContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp">
+
+        <TextView
+            android:id="@+id/tvRegisterTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Registro"
+            style="@style/Style.FitMakers.Title" />
+
+        <!-- Grupo de campos de texto -->
+        <TextView
+            android:text="Nombre completo :"
+            style="@style/Style.FitMakers.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Input"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:text="Edad :"
+            style="@style/Style.FitMakers.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etAge"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Input"
+            android:inputType="number" />
+
+        <TextView
+            android:text="DNI :"
+            style="@style/Style.FitMakers.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etDniRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Input"
+            android:inputType="text" />
+
+        <TextView
+            android:text="Contraseña :"
+            style="@style/Style.FitMakers.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etPasswordRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Input"
+            android:inputType="textPassword" />
+
+        <TextView
+            android:text="Altura :"
+            style="@style/Style.FitMakers.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etHeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Input"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:text="Peso :"
+            style="@style/Style.FitMakers.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etWeight"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Input"
+            android:inputType="numberDecimal" />
+
+        <TextView
+            android:id="@+id/tvSexLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sexo :"
+            style="@style/Style.FitMakers.Label"
+            android:layout_marginTop="10dp" />
+
+        <RadioGroup
+            android:id="@+id/rgSex"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="16dp">
+
+            <RadioButton
+                android:id="@+id/rbMale"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_input_rounded"
+                android:buttonTint="@color/dark_blue"
+                android:textColor="@color/dark_blue"
+                android:textStyle="bold"
+                android:paddingStart="12dp"
+                android:text="Hombre" />
+
+            <RadioButton
+                android:id="@+id/rbFemale"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_input_rounded"
+                android:buttonTint="@color/dark_blue"
+                android:textColor="@color/dark_blue"
+                android:textStyle="bold"
+                android:paddingStart="12dp"
+                android:text="Mujer" />
+        </RadioGroup>
+
+        <TextView
+            android:text="Dirección :"
+            style="@style/Style.FitMakers.Label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Input"
+            android:inputType="textPostalAddress" />
+
+        <TextView
+            android:id="@+id/tvPathologyLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Patología :"
+            android:layout_marginTop="15dp"
+            style="@style/Style.FitMakers.Label" />
+
+        <RadioGroup
+            android:id="@+id/rgPathology"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rbUpperBody"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:background="@drawable/bg_input_rounded"
+                android:buttonTint="@color/dark_blue"
+                android:textColor="@color/dark_blue"
+                android:padding="8dp"
+                android:text="Superior" />
+
+            <RadioButton
+                android:id="@+id/rbLowerBody"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:background="@drawable/bg_input_rounded"
+                android:buttonTint="@color/dark_blue"
+                android:textColor="@color/dark_blue"
+                android:padding="8dp"
+                android:text="Inferior" />
+        </RadioGroup>
+
+        <!-- Botón del micrófono (Decorativo por ahora) -->
+        <ImageButton
+            android:id="@+id/btnMicRegister"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="24dp"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_mic"
+            android:scaleType="fitCenter"
+            android:padding="8dp"
+            android:contentDescription="Grabar voz"
+            android:layout_marginBottom="24dp"
+            app:tint="@color/dark_blue" />
+
+        <Button
+            android:id="@+id/btnFinishRegister"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:minWidth="200dp"
+            style="@style/Style.FitMakers.Button.Primary"
+            android:text="Registro" />
+
+    </LinearLayout>
+</ScrollView>

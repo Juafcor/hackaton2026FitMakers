@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="colorPrimary">@color/orange</item>
+        <item name="colorPrimaryDark">@color/dark_blue</item>
+        <item name="colorAccent">@color/custom_green</item>
+        <item name="android:windowBackground">@color/white</item>
+    </style>
+
+    <style name="Style.FitMakers" parent="android:Theme" />
+
+    <style name="Style.FitMakers.Button" parent="Widget.MaterialComponents.Button"/>
+
+    <style name="Style.FitMakers.Title" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">28sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/orange</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginBottom">24dp</item>
+    </style>
+
+    <style name="Style.FitMakers.Label" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/dark_blue</item>
+    </style>
+
+    <style name="Style.FitMakers.Input" parent="Widget.AppCompat.EditText">
+        <item name="android:background">@drawable/bg_input_rounded</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textColorHint">#7F8C8D</item>
+        <item name="android:padding">14dp</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+        <item name="android:minHeight">48dp</item>
+    </style>
+
+    <style name="Style.FitMakers.Button.Primary" parent="Widget.MaterialComponents.Button">
+        <item name="backgroundTint">@color/orange</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textStyle">bold</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:paddingTop">12dp</item>
+        <item name="android:paddingBottom">12dp</item>
+    </style>
+
+    <style name="Style.FitMakers.Button.Secondary" parent="Widget.MaterialComponents.Button.OutlinedButton">
+        <item name="backgroundTint">@color/dark_blue</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="strokeColor">@color/orange</item>
+        <item name="strokeWidth">1dp</item>
+        <item name="cornerRadius">12dp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <!-- Specific Button Colors as Requested -->
+    <style name="Style.FitMakers.Button.Green" parent="Style.FitMakers.Button.Primary">
+        <item name="backgroundTint">@color/custom_green</item>
+        <item name="android:textColor">@color/white</item> <!-- White text for green button usually looks better/standard -->
+    </style>
+
+    <style name="Style.FitMakers.Button.Orange" parent="Style.FitMakers.Button.Primary">
+        <item name="backgroundTint">@color/orange</item>
+        <item name="android:textColor">@color/dark_blue</item>
+    </style>
+
+    <style name="Style.FitMakers.Card" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">6dp</item>
+        <item name="contentPadding">16dp</item>
+        <item name="android:layout_margin">8dp</item>
+    </style>
+
+</resources>
