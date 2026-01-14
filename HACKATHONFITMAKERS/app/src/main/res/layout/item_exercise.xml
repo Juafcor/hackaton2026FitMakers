@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    style="@style/Style.FitMakers.Card"
+    app:cardBackgroundColor="@color/white">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tvItemTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Título del Ejercicio"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+
+        <TextView
+            android:id="@+id/tvItemDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Descripción breve de cómo realizar el ejercicio para evitar lesiones."
+            android:textSize="14sp"
+            android:layout_marginTop="8dp"
+            android:textColor="#555555"/>
+
+        <Button
+            android:id="@+id/btnWatchVideo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="VER VÍDEO GUÍA"
+            android:layout_marginTop="12dp"
+            style="@style/Style.FitMakers.Button.Primary"
+            app:icon="@android:drawable/ic_media_play"
+            app:iconGravity="textStart"
+            app:iconTint="@color/dark_blue"/> 
+            <!-- Icono oscuro sobre botón verde/naranja si fuera necesario -->
+            
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

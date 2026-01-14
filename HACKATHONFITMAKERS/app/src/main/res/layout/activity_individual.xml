@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_blue"
+        android:padding="16dp">
+
+
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@android:drawable/ic_menu_revert"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:contentDescription="Volver" />
+
+        <TextView
+            android:id="@+id/tvIndividualTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RUTINA"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvDayMon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Lu"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+
+        <TextView
+            android:id="@+id/tvDayTue"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ma"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+
+        <TextView
+            android:id="@+id/tvDayWed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mi"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+
+        <TextView
+            android:id="@+id/tvDayThu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Ju"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+
+        <TextView
+            android:id="@+id/tvDayFri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vi"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tu rutina de hoy"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/orange"
+        android:layout_marginBottom="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExercises"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:scrollbars="vertical"/>
+
+</LinearLayout>
