@@ -30,7 +30,7 @@ class IaActivity : AppCompatActivity() {
         ivAvatar = findViewById(R.id.ivAiAvatar)
         val btnSend = findViewById<Button>(R.id.btnSend)
 
-        // Animación de entrada del avatar
+        // Animación pequeña del avatar al entrar
         ivAvatar.animate().scaleX(1.1f).scaleY(1.1f).setDuration(500).withEndAction {
             ivAvatar.animate().scaleX(1.0f).scaleY(1.0f).setDuration(500)
         }
@@ -38,11 +38,11 @@ class IaActivity : AppCompatActivity() {
         btnSend.setOnClickListener {
             val userText = etMessage.text.toString()
             if (userText.isNotEmpty()) {
-                // 1. Mensaje Usuario
+                // 1. Mensaje que enviamos nosotros
                 addMessageToChat(userText, true)
                 etMessage.setText("")
 
-                // 2. Respuesta IA (con retraso)
+                // 2. Respuesta de la IA (esperamos un poco para que parezca real)
                 Handler(Looper.getMainLooper()).postDelayed({
                     ivAvatar.animate().rotation(360f).setDuration(500)
                     addMessageToChat("Interesante... Para eso te recomiendo enfocarte en la técnica.", false)
@@ -74,7 +74,7 @@ class IaActivity : AppCompatActivity() {
         tv.layoutParams = params
         llMessageContainer.addView(tv)
 
-        // Auto-scroll hacia abajo
+        // Auto-scroll hacia abajo para ver lo último
         scrollView.post {
             scrollView.fullScroll(ScrollView.FOCUS_DOWN)
         }

@@ -1,75 +1,99 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rootLogin"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center_horizontal"
-    android:padding="20dp">
-
-    <TextView
-        android:id="@+id/tvLoginTitle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="FITMAKERS"
-        android:textSize="30sp"
-        android:textStyle="bold"
-        android:layout_marginBottom="50dp"/>
-
-    <Button
-        android:id="@+id/btnShowLogin"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Iniciar Sesión" />
+    android:fillViewport="true"
+    android:background="@color/dark_blue">
 
     <LinearLayout
-        android:id="@+id/llLoginFields"
+        android:id="@+id/rootLogin"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:visibility="gone"
-        android:layout_marginTop="10dp">
+        android:gravity="center_horizontal"
+        android:padding="32dp">
 
-        <EditText
-            android:id="@+id/etDniLogin"
+        <ImageView
+            android:id="@+id/ivLogo"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:contentDescription="FitMakers Logo"
+            android:layout_marginTop="40dp"
+            android:layout_marginBottom="40dp"/>
+
+        <LinearLayout
+            android:id="@+id/llLoginFields"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Introduce tu DNI"
-            android:inputType="text" />
+            android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/etPassword"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Contraseña"
-            android:inputType="textPassword" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="DNI"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp"/>
 
-        <Button
-            android:id="@+id/btnSubmitLogin"
+            <EditText
+                android:id="@+id/etDniLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Style.FitMakers.Input"
+                android:inputType="text" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contraseña"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                android:layout_marginBottom="4dp"/>
+
+            <EditText
+                android:id="@+id/etPassword"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Style.FitMakers.Input"
+                android:inputType="textPassword" />
+
+            <ImageButton
+                android:id="@+id/btnMicLogin"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:src="@android:drawable/ic_btn_speak_now"
+                android:scaleType="fitCenter"
+                android:padding="8dp"
+                android:contentDescription="Grabar voz"
+                android:layout_marginBottom="24dp"/>
+
+            <Button
+                android:id="@+id/btnSubmitLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Style.FitMakers.Button.Primary"
+                android:text="Iniciar sesión"
+                android:layout_marginBottom="24dp"/>
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/tvNoAccount"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Entrar"
-            android:layout_gravity="right" />
+            android:text="¿No tienes cuenta?"
+            android:textColor="@color/white"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btnGoToRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Button.Secondary"
+            android:text="Registro" />
+
     </LinearLayout>
-
-    <View
-        android:id="@+id/vLoginDivider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#CCCCCC"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
-
-    <TextView
-        android:id="@+id/tvNoAccount"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="¿No tienes cuenta?" />
-
-    <Button
-        android:id="@+id/btnGoToRegister"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Registrarse" />
-
-</LinearLayout>
+</ScrollView>

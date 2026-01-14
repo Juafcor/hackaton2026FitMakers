@@ -2,61 +2,49 @@ package com.example.hackathonfitmakers
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
-import android.widget.LinearLayout
+import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 
 class LoginActivity : AppCompatActivity() {
-
-    // Usamos 'lateinit' para no tener que poner signos de interrogación (?) ni exclamación (!!) por todo el código
-    private lateinit var llLoginFields: LinearLayout
-    private lateinit var etDni: EditText
-    private lateinit var etPassword: EditText
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_login) // Asegúrate de que este R sea el de tu paquete, no android.R
+        setContentView(R.layout.activity_login)
 
-        // Referencias a los elementos del XML
-        val btnShowLogin = findViewById<Button>(R.id.btnShowLogin)
-        val btnSubmitLogin = findViewById<Button>(R.id.btnSubmitLogin)
-        val btnGoToRegister = findViewById<Button>(R.id.btnGoToRegister)
+        // Referencias a los botones y campos de texto
+        val etDni = findViewById<EditText>(R.id.etDniLogin)
+        val etPassword = findViewById<EditText>(R.id.etPassword)
+        val btnLogin = findViewById<Button>(R.id.btnSubmitLogin)
+        val btnRegister = findViewById<Button>(R.id.btnGoToRegister)
+        val btnMic = findViewById<ImageButton>(R.id.btnMicLogin)
 
-        // Inicializamos las variables globales
-        llLoginFields = findViewById(R.id.llLoginFields)
-        etDni = findViewById(R.id.etDniLogin)
-        etPassword = findViewById(R.id.etPassword)
-
-        // 1. Botón para mostrar los campos ocultos (Estilo Kotlin con lambda)
-        btnShowLogin.setOnClickListener {
-            if (llLoginFields.visibility == View.GONE) {
-                llLoginFields.visibility = View.VISIBLE
-                btnShowLogin.visibility = View.GONE
-            }
-        }
-
-        // 2. Botón ENTRAR
-        btnSubmitLogin.setOnClickListener {
+        // Al pulsar iniciar sesión
+        btnLogin.setOnClickListener {
+            // Obtenemos los textos
             val dni = etDni.text.toString()
             val pass = etPassword.text.toString()
 
-            if (dni.isEmpty() || pass.isEmpty()) {
-                Toast.makeText(this, "Rellena todos los campos", Toast.LENGTH_SHORT).show()
-            } else {
-                // Navegar al Main
+            if (dni.isNotEmpty() && pass.isNotEmpty()) {
+                // Si está bien, vamos al menú principal
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish() // Cierra el login para que no se pueda volver atrás con el botón 'atrás'
+                finish() // Cerramos esta pantalla
+            } else {
+                Toast.makeText(this, "Introduce DNI y contraseña", Toast.LENGTH_SHORT).show()
             }
         }
 
-        // 3. Botón REGISTRARSE
-        btnGoToRegister.setOnClickListener {
+        // Al pulsar registrarse, vamos a la pantalla de registro
+        btnRegister.setOnClickListener {
             val intent = Intent(this, RegisterActivity::class.java)
             startActivity(intent)
+        }
+
+        // Botón del micrófono (aún no hace nada real)
+        btnMic.setOnClickListener {
+            Toast.makeText(this, "Escuchando...", Toast.LENGTH_SHORT).show()
         }
     }
 }

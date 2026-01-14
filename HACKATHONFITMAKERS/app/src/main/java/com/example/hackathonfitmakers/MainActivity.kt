@@ -1,6 +1,8 @@
 package com.example.hackathonfitmakers
 
 import android.content.Intent
+import android.view.View // Importamos View
+import android.net.Uri // Para abrir enlaces web
 import android.os.Bundle
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
@@ -10,23 +12,36 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val btnIndividual = findViewById<Button>(R.id.btnIndividual)
-        val btnCommunity = findViewById<Button>(R.id.btnCommunity)
-        val btnAI = findViewById<Button>(R.id.btnAI)
+        // Referencias a los botones
+        // Buscamos las tarjetas del menú en la pantalla
+        val btnIndividual = findViewById<android.view.View>(R.id.btnIndividual)
+        val btnCommunity = findViewById<android.view.View>(R.id.btnCommunity)
+        val btnAI = findViewById<android.view.View>(R.id.btnAI)
+        val btnWeb = findViewById<android.view.View>(R.id.btnWeb)
 
-        // Ir a Rutina Individual
+        // Botón para ir al plan individual
         btnIndividual.setOnClickListener {
             startActivity(Intent(this, IndividualActivity::class.java))
         }
 
-        // Ir a Comunidad
+        // Botón para ir a la comunidad
         btnCommunity.setOnClickListener {
             startActivity(Intent(this, CommunityActivity::class.java))
         }
 
-        // Ir a IA
+        // Botón para hablar con el entrenador IA
         btnAI.setOnClickListener {
             startActivity(Intent(this, IaActivity::class.java))
+        }
+
+        // Botón para abrir la web de ejercicios
+        btnWeb.setOnClickListener {
+            // Abrimos el navegador con la web
+            val url = "https://www.tusitioweb.com/ejercicios"
+
+            val intent = Intent(Intent.ACTION_VIEW)
+            intent.data = Uri.parse(url)
+            startActivity(intent)
         }
     }
 }

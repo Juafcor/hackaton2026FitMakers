@@ -1,144 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/svCommunityRoot"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
-    <LinearLayout
-        android:id="@+id/llCommunityContainer"
+    <!-- Cabecera estilo App -->
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:padding="20dp">
+        android:background="@color/dark_blue"
+        android:padding="16dp">
+
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@android:drawable/ic_menu_revert"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            app:tint="@color/white"
+            android:layout_centerVertical="true"
+            android:layout_alignParentStart="true"
+            android:contentDescription="Volver" />
 
         <TextView
             android:id="@+id/tvCommunityTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="PRÓXIMOS EVENTOS"
-            android:textSize="24sp"
+            android:text="EVENTOS"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="30dp"/>
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/llEvent1Container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#EEEEEE"
-            android:padding="15dp"
-            android:layout_marginBottom="20dp">
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvEvents"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="16dp"
+        android:scrollbars="vertical"/>
 
-            <TextView
-                android:id="@+id/tvEvent1Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Maratón Solidaria FITMAKERS"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvEvent1Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fecha: 24 Oct | Hora: 09:00 AM"
-                android:layout_marginTop="5dp"
-                android:textColor="#555555"/>
-
-            <TextView
-                android:id="@+id/tvEvent1Place"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Lugar: Parque Central"
-                android:textStyle="italic"
-                android:layout_marginBottom="10dp"/>
-
-            <LinearLayout
-                android:id="@+id/llEvent1Content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
-
-                <TextView
-                    android:id="@+id/tvEvent1Desc"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Únete a nosotros para una carrera de 5km con fines benéficos. Apta para todos los niveles de resistencia."
-                    android:paddingEnd="10dp"/>
-
-                <ImageView
-                    android:id="@+id/imgEvent1"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:background="#CCCCCC"
-                    android:scaleType="centerCrop"/>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnJoinEvent1"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Apuntarse" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:id="@+id/llEvent2Container"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:background="#EEEEEE"
-            android:padding="15dp">
-
-            <TextView
-                android:id="@+id/tvEvent2Title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Yoga al aire libre"
-                android:textSize="20sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/tvEvent2Date"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Fecha: 26 Oct | Hora: 18:00 PM"
-                android:layout_marginTop="5dp"
-                android:layout_marginBottom="10dp"/>
-
-            <LinearLayout
-                android:id="@+id/llEvent2Content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:layout_marginBottom="15dp">
-
-                <TextView
-                    android:id="@+id/tvEvent2Desc"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Clase relajante de Yoga Vinyasa al atardecer. Trae tu esterilla y agua."
-                    android:paddingEnd="10dp"/>
-
-                <ImageView
-                    android:id="@+id/imgEvent2"
-                    android:layout_width="80dp"
-                    android:layout_height="80dp"
-                    android:src="@android:drawable/ic_menu_gallery"
-                    android:background="#CCCCCC"
-                    android:scaleType="centerCrop"/>
-            </LinearLayout>
-
-            <Button
-                android:id="@+id/btnJoinEvent2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Apuntarse" />
-        </LinearLayout>
-
-    </LinearLayout>
-</ScrollView>
+</LinearLayout>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/bg_input_rounded"
+    android:backgroundTint="@color/white"
+    android:padding="16dp">
+
+    <TextView
+        android:id="@+id/tvPopupTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Reproduciendo..."
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="@color/dark_blue"
+        android:gravity="center"
+        android:layout_marginBottom="16dp"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:background="@color/black"
+        android:layout_marginBottom="16dp">
+
+        <VideoView
+            android:id="@+id/vvPopup"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"/>
+    </FrameLayout>
+
+    <Button
+        android:id="@+id/btnClosePopup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cerrar Vídeo"
+        style="@style/Style.FitMakers.Button.Secondary"/>
+</LinearLayout>

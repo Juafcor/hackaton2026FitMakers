@@ -11,16 +11,14 @@ class RegisterActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_register) // Usa el R de tu proyecto, NO android.R
+        setContentView(R.layout.activity_register)
 
-        // Referencias a los elementos de la interfaz
-        // En Kotlin no hace falta poner <EditText?> con interrogación, asumimos que existe
+        // Buscamos los controles en la pantalla
         val etName = findViewById<EditText>(R.id.etName)
         val btnFinish = findViewById<Button>(R.id.btnFinishRegister)
 
-        // Sintaxis simplificada (Lambda) para el click
+        // Cuando pulsamos el botón de terminar registro
         btnFinish.setOnClickListener {
-            // En Kotlin se usa .text en vez de .getText()
             if (etName.text.toString().isEmpty()) {
                 Toast.makeText(
                     this,
@@ -34,10 +32,10 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.LENGTH_LONG
                 ).show()
 
-                // Al terminar registro, vamos directos al Menu Principal
+                // Volvemos al menú principal y cerramos el registro
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
-                finish() // Cierra el registro para no volver atrás
+                finish()
             }
         }
     }

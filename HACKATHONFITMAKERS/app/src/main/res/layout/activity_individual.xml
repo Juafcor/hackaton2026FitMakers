@@ -1,148 +1,106 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/svIndividualRoot"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="15dp">
+    android:orientation="vertical"
+    android:background="@android:color/white">
 
-    <LinearLayout
-        android:id="@+id/llIndividualContainer"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:background="@color/dark_blue"
+        android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/ivHomeIndividual"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:src="@drawable/ic_launcher_foreground"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/tvIndividualTitle"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="RUTINA"
-            android:textSize="28sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:gravity="center"
-            android:layout_marginBottom="20dp"/>
+            android:textColor="@color/white"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
-        <LinearLayout
-            android:id="@+id/llHeaderContainer"
-            android:layout_width="match_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tvDayMon"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="#EEEEEE"
+            android:text="Lu"
             android:padding="10dp"
-            android:gravity="center_vertical"
-            android:layout_marginBottom="25dp">
-
-            <LinearLayout
-                android:id="@+id/llDateContainer"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/tvLabelToday"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="HOY"
-                    android:textSize="12sp"
-                    android:textColor="#555555"/>
-
-                <Spinner
-                    android:id="@+id/spinnerDays"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:minHeight="48dp" />
-            </LinearLayout>
-
-        </LinearLayout>
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
 
         <TextView
-            android:id="@+id/tvExercise1Title"
+            android:id="@+id/tvDayTue"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="1. Sentadillas con peso"
-            android:textSize="18sp"
+            android:text="Ma"
+            android:padding="10dp"
             android:textStyle="bold"
-            android:layout_marginBottom="5dp"/>
-
-        <FrameLayout
-            android:id="@+id/flVideo1"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#DDDDDD"
-            android:layout_marginBottom="25dp">
-
-            <VideoView
-                android:id="@+id/videoEx1"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center" />
-
-            <ImageView
-                android:id="@+id/ivPlayIcon1"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@android:drawable/ic_media_play"
-                android:layout_gravity="center"/>
-        </FrameLayout>
+            android:textColor="@color/dark_blue"/>
 
         <TextView
-            android:id="@+id/tvExercise2Title"
+            android:id="@+id/tvDayWed"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="2. Press Militar"
-            android:textSize="18sp"
+            android:text="Mi"
+            android:padding="10dp"
             android:textStyle="bold"
-            android:layout_marginBottom="5dp"/>
-
-        <FrameLayout
-            android:id="@+id/flVideo2"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#DDDDDD"
-            android:layout_marginBottom="25dp">
-
-            <VideoView
-                android:id="@+id/videoEx2"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"/>
-
-            <ImageView
-                android:id="@+id/ivPlayIcon2"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@android:drawable/ic_media_play"
-                android:layout_gravity="center"/>
-        </FrameLayout>
+            android:textColor="@color/dark_blue"/>
 
         <TextView
-            android:id="@+id/tvExercise3Title"
+            android:id="@+id/tvDayThu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="3. Zancadas"
-            android:textSize="18sp"
+            android:text="Ju"
+            android:padding="10dp"
             android:textStyle="bold"
-            android:layout_marginBottom="5dp"/>
+            android:textColor="@color/dark_blue"/>
 
-        <FrameLayout
-            android:id="@+id/flVideo3"
-            android:layout_width="match_parent"
-            android:layout_height="200dp"
-            android:background="#DDDDDD"
-            android:layout_marginBottom="20dp">
-
-            <VideoView
-                android:id="@+id/videoEx3"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_gravity="center"/>
-
-            <ImageView
-                android:id="@+id/ivPlayIcon3"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:src="@android:drawable/ic_media_play"
-                android:layout_gravity="center"/>
-        </FrameLayout>
-
+        <TextView
+            android:id="@+id/tvDayFri"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Vi"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:textColor="@color/dark_blue"/>
     </LinearLayout>
-</ScrollView>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tu rutina de hoy"
+        android:gravity="center"
+        android:textSize="22sp"
+        android:textStyle="bold"
+        android:textColor="@color/orange"
+        android:layout_marginBottom="16dp"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvExercises"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:padding="16dp"
+        android:scrollbars="vertical"/>
+
+</LinearLayout>
