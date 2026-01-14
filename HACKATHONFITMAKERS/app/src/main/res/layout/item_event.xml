@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="#EEEEEE"
+    android:padding="15dp"
+    android:layout_marginBottom="20dp"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="10dp">
+
+    <TextView
+        android:id="@+id/tvItemEventTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Título del Evento"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tvItemEventDate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fecha: DD MMM | Hora: HH:MM"
+        android:layout_marginTop="5dp"
+        android:textColor="#555555"/>
+
+    <TextView
+        android:id="@+id/tvItemEventPlace"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Lugar: Ubicación"
+        android:textStyle="italic"
+        android:layout_marginBottom="10dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="15dp">
+
+        <TextView
+            android:id="@+id/tvItemEventDesc"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Descripción del evento..."
+            android:paddingEnd="10dp"/>
+
+        <ImageView
+            android:id="@+id/imgItemEvent"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@android:drawable/ic_menu_gallery"
+            android:background="#CCCCCC"
+            android:scaleType="centerCrop"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnItemJoin"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Apuntarse" />
+</LinearLayout>
