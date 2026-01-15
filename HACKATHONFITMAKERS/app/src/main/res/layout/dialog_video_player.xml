@@ -24,11 +24,24 @@
         android:background="@color/black"
         android:layout_marginBottom="16dp">
 
-        <VideoView
+            <VideoView
             android:id="@+id/vvPopup"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="center"/>
+
+        <ImageButton
+            android:id="@+id/btnFullscreen"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_gravity="bottom|end"
+            android:layout_margin="8dp"
+            android:background="@drawable/bg_message_sent"
+            android:backgroundTint="#80000000"
+            android:src="@android:drawable/ic_menu_crop"
+            android:contentDescription="Pantalla Completa"
+            android:padding="8dp"
+            android:scaleType="fitCenter"/>
     </FrameLayout>
 
     <Button

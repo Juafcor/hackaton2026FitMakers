@@ -27,7 +27,8 @@
 
         <activity
             android:name=".LoginActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity
             android:name=".MainActivity"
@@ -35,7 +36,8 @@
 
         <activity
             android:name=".RegisterActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
 
         <activity
             android:name=".IndividualActivity"
@@ -48,6 +50,12 @@
         <activity
             android:name=".IaActivity"
             android:exported="false" />
+
+        <activity
+            android:name=".FullscreenVideoActivity"
+            android:exported="false"
+            android:screenOrientation="landscape"
+            android:theme="@style/Theme.AppCompat.NoActionBar" />
 
     </application>
 

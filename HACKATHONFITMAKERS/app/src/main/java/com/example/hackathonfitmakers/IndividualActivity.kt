@@ -69,7 +69,7 @@ class IndividualActivity : AppCompatActivity() {
 
         // Al día seleccionado le ponemos estilo naranja y texto blanco
         selectedView.setBackgroundResource(R.drawable.bg_input_rounded)
-        selectedView.background.setTint(ContextCompat.getColor(this, R.color.orange))
+        selectedView.background.mutate().setTint(ContextCompat.getColor(this, R.color.orange))
         selectedView.setTextColor(Color.WHITE)
 
         // Mostramos la rutina de ese día
@@ -77,11 +77,22 @@ class IndividualActivity : AppCompatActivity() {
     }
 
     private fun cargarRutinaPorDia(dia: String) {
+<<<<<<< Updated upstream
         val listaEjercicios = when (dia) {
             "Lunes" -> listOf(
                 Exercise("1. Sentadillas Silla", "3 series de 10.", R.raw.ejemplo_video),
                 Exercise("2. Elevación Frontal", "Sube los brazos.", R.raw.video_martes),
                 Exercise("3. Marcha estática", "Levanta rodillas.", R.raw.ejemplo_video)
+=======
+        // Fetch up to 3 exercises for the day
+        FirestoreHelper.getExercisesForDay(dia, onSuccess = { exercisesData ->
+            val listaEjercicios = mutableListOf<Exercise>()
+            
+            // Available local videos for exercises
+            val availableVideos = listOf(
+                R.raw.ejercicio02,
+                R.raw.ejercicio01
+>>>>>>> Stashed changes
             )
             "Martes" -> listOf(
                 Exercise("1. Flexiones pared", "Flexiona codos.", R.raw.video_martes),
@@ -106,25 +117,47 @@ class IndividualActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
         val dialog = builder.create()
+        
+        // Fondo transparente para bordes redondeados
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         val tvTitle = dialogView.findViewById<TextView>(R.id.tvPopupTitle)
         val videoView = dialogView.findViewById<VideoView>(R.id.vvPopup)
         val btnClose = dialogView.findViewById<Button>(R.id.btnClosePopup)
+        val btnFullscreen = dialogView.findViewById<android.widget.ImageButton>(R.id.btnFullscreen)
 
         tvTitle.text = exercise.title
 
+        val videoPath = "android.resource://" + packageName + "/" + exercise.videoResId
+        val uri = Uri.parse(videoPath)
+        
         try {
-            val videoPath = "android.resource://" + packageName + "/" + exercise.videoResId
-            val uri = Uri.parse(videoPath)
             videoView.setVideoURI(uri)
 
             val mediaController = MediaController(this)
             mediaController.setAnchorView(videoView)
             videoView.setMediaController(mediaController)
 
-            videoView.start()
+            videoView.setOnPreparedListener { mp ->
+                mp.start()
+            }
+            
+            videoView.setOnErrorListener { _, what, extra ->
+                Toast.makeText(this, "Error reproduciendo video ($what, $extra)", Toast.LENGTH_SHORT).show()
+                true
+            }
+            
         } catch (e: Exception) {
-            Toast.makeText(this, "Error video: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error iniciando video: ${e.message}", Toast.LENGTH_SHORT).show()
+        }
+
+        // Lógica de Pantalla Completa
+        btnFullscreen.setOnClickListener {
+            val intent = android.content.Intent(this, FullscreenVideoActivity::class.java)
+            intent.putExtra("VIDEO_URL", videoPath)
+            startActivity(intent)
+            // Opcional: Cerrar el popup al ir a fullscreen o pausarlo
+            videoView.pause()
         }
 
         btnClose.setOnClickListener { dialog.dismiss() }

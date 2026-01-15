@@ -5,6 +5,7 @@
         <item name="colorPrimaryDark">@color/dark_blue</item>
         <item name="colorAccent">@color/custom_green</item>
         <item name="android:windowBackground">@color/white</item>
+        <item name="android:fontFamily">serif</item>
     </style>
 
     <style name="Style.FitMakers" parent="android:Theme" />
@@ -12,51 +13,86 @@
     <style name="Style.FitMakers.Button" parent="Widget.MaterialComponents.Button"/>
 
     <style name="Style.FitMakers.Title" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">28sp</item>
+        <item name="android:textSize">38sp</item> <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <style name="Style.FitMakers.Title.Blue" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">38sp</item> <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:gravity">center</item>
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <style name="Style.FitMakers.Subtitle" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">32sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/orange</item>
         <item name="android:gravity">center</item>
         <item name="android:layout_marginBottom">24dp</item>
+        <item name="android:fontFamily">serif</item>
     </style>
 
-    <style name="Style.FitMakers.Label" parent="Widget.MaterialComponents.TextView">
-        <item name="android:textSize">16sp</item>
-        <item name="android:textStyle">bold</item>
+    <style name="Style.FitMakers.Label.White" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">24sp</item> <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <style name="Style.FitMakers.Label.Blue" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">24sp</item> <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <style name="Style.FitMakers.Body" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textSize">22sp</item> <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:fontFamily">serif</item>
     </style>
 
     <style name="Style.FitMakers.Input" parent="Widget.AppCompat.EditText">
         <item name="android:background">@drawable/bg_input_rounded</item>
+
+        <item name="android:theme">@style/Theme.FitMakers.InputOverride</item>
+        <item name="android:backgroundTint">@null</item>
         <item name="android:textColor">@color/dark_blue</item>
         <item name="android:textColorHint">#7F8C8D</item>
-        <item name="android:padding">14dp</item>
-        <item name="android:textSize">16sp</item>
-        <item name="android:layout_marginBottom">16dp</item>
-        <item name="android:minHeight">48dp</item>
+        <item name="android:padding">20dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+        <item name="android:minHeight">64dp</item>
+        <item name="android:fontFamily">serif</item>
     </style>
 
     <style name="Style.FitMakers.Button.Primary" parent="Widget.MaterialComponents.Button">
         <item name="backgroundTint">@color/orange</item>
         <item name="android:textColor">@color/dark_blue</item>
         <item name="android:textStyle">bold</item>
-        <item name="cornerRadius">12dp</item>
-        <item name="android:paddingTop">12dp</item>
-        <item name="android:paddingBottom">12dp</item>
+        <item name="cornerRadius">18dp</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">serif</item>
     </style>
 
     <style name="Style.FitMakers.Button.Secondary" parent="Widget.MaterialComponents.Button.OutlinedButton">
         <item name="backgroundTint">@color/dark_blue</item>
         <item name="android:textColor">@color/white</item>
         <item name="strokeColor">@color/orange</item>
-        <item name="strokeWidth">1dp</item>
-        <item name="cornerRadius">12dp</item>
+        <item name="strokeWidth">3dp</item>
+        <item name="cornerRadius">18dp</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:textSize">22sp</item>
+        <item name="android:fontFamily">serif</item>
     </style>
 
-    <!-- Specific Button Colors as Requested -->
     <style name="Style.FitMakers.Button.Green" parent="Style.FitMakers.Button.Primary">
         <item name="backgroundTint">@color/custom_green</item>
-        <item name="android:textColor">@color/white</item> <!-- White text for green button usually looks better/standard -->
+        <item name="android:textColor">@color/white</item>
     </style>
 
     <style name="Style.FitMakers.Button.Orange" parent="Style.FitMakers.Button.Primary">
@@ -65,10 +101,34 @@
     </style>
 
     <style name="Style.FitMakers.Card" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">6dp</item>
-        <item name="contentPadding">16dp</item>
-        <item name="android:layout_margin">8dp</item>
+        <item name="cardCornerRadius">24dp</item>
+        <item name="cardElevation">8dp</item>
+        <item name="contentPadding">20dp</item>
+        <item name="android:layout_margin">12dp</item>
+    </style>
+
+    <style name="Style.FitMakers.DayText">
+        <item name="android:textSize">20sp</item>
+        <item name="android:textColor">@color/dark_blue</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">serif</item>
+    </style>
+
+    <style name="Style.FitMakers.Button.Small" parent="Style.FitMakers.Button.Primary">
+        <item name="android:textSize">18sp</item>
+        <item name="android:paddingTop">10dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:paddingStart">20dp</item>
+        <item name="android:paddingEnd">20dp</item>
+        <item name="cornerRadius">14dp</item>
+    </style>
+
+    <style name="Theme.FitMakers.InputOverride" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/dark_blue</item>
+
+        <item name="colorControlNormal">@color/dark_blue</item>
+
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
 </resources>

@@ -15,10 +15,27 @@ import androidx.appcompat.app.AppCompatActivity
 
 class IaActivity : AppCompatActivity() {
 
+<<<<<<< Updated upstream
     private lateinit var llMessageContainer: LinearLayout
     private lateinit var etMessage: EditText
     private lateinit var scrollView: ScrollView
     private lateinit var ivAvatar: ImageView
+=======
+    private lateinit var tts: TextToSpeech
+    private lateinit var adapter: MessageAdapter
+    private val messages = mutableListOf<Message>()
+    private var scriptIndex = 0
+    
+    // RESPUESTAS PREPARADAS
+    private val script = listOf(
+        "Hola, soy un chatbot creado para el Hackathon.",
+        "Hoy es viernes, 16 de enero de 2026.",
+        "¡Muy bien, gracias! 😊 ¿Y tú qué tal estás hoy?",
+        "Lo siento 😕. Descansa, pon hielo y evita forzarla. Si no mejora o se inflama mucho, consulta al médico.",
+        "Sí, te ayudo: entra en el apartado de trabajo individual de la app para empezar.",
+        "¡De nada! 😊"
+    )
+>>>>>>> Stashed changes
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

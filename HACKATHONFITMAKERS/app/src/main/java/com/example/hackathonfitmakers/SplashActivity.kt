@@ -10,6 +10,9 @@ class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        // Forzar modo claro siempre
+        androidx.appcompat.app.AppCompatDelegate.setDefaultNightMode(androidx.appcompat.app.AppCompatDelegate.MODE_NIGHT_NO)
+        
         setContentView(R.layout.activity_splash)
 
         val videoView = findViewById<VideoView>(R.id.videoViewSplash)

@@ -3,44 +3,94 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="8dp"
+    android:layout_margin="10dp"
     style="@style/Style.FitMakers.Card"
-    app:cardBackgroundColor="@color/white">
+    app:cardBackgroundColor="#F9F9F9"
+    app:strokeColor="@color/orange"
+    app:strokeWidth="2dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
 
-        <TextView
-            android:id="@+id/tvItemTitle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Título del Ejercicio"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:textColor="@color/dark_blue"/>
+        <!-- Contenedor Imagen + Play -->
+        <FrameLayout
+            android:layout_width="140dp"
+            android:layout_height="140dp">
 
-        <TextView
-            android:id="@+id/tvItemDescription"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Descripción breve de cómo realizar el ejercicio para evitar lesiones."
-            android:textSize="14sp"
-            android:layout_marginTop="8dp"
-            android:textColor="#555555"/>
-
-        <Button
-            android:id="@+id/btnWatchVideo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="VER VÍDEO GUÍA"
-            android:layout_marginTop="12dp"
-            style="@style/Style.FitMakers.Button.Primary"
-            app:icon="@android:drawable/ic_media_play"
-            app:iconGravity="textStart"
-            app:iconTint="@color/dark_blue"/> 
-            <!-- Icono oscuro sobre botón verde/naranja si fuera necesario -->
+            <!-- Placeholder para la imagen del video -->
+            <ImageView
+                android:id="@+id/ivExerciseThumb"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@color/dark_blue"
+                android:contentDescription="Miniatura ejercicio" />
             
+            <!-- Overlay oscuro sutil -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#33000000"/>
+
+            <!-- Botón Play superpuesto -->
+            <ImageView
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@android:drawable/ic_media_play"
+                android:layout_gravity="center"
+                app:tint="@color/white"
+                android:background="@drawable/bg_message_sent" 
+                android:padding="8dp"/> 
+                <!-- Reusando bg_message_sent como círculo naranja rápido si es redondo, 
+                     o mejor un shape oval. Usaré bg_message_sent por ahora ya que es rounded 
+                     o crearé inline un background tint si es posible. 
+                     En la imagen es circular transparente con borde blanco. 
+                     Simplifiquemos: icono blanco grande. -->
+        </FrameLayout>
+
+        <!-- Textos a la derecha -->
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <TextView
+                android:id="@+id/tvItemTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ejercicio 1: Estiramientos"
+                style="@style/Style.FitMakers.Label.Blue"
+                android:textSize="22sp"
+                android:maxLines="5"
+                android:ellipsize="none"/>
+
+            <TextView
+                android:id="@+id/tvItemDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="3 Series x 15 Reps"
+                style="@style/Style.FitMakers.Body"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:layout_marginTop="8dp"
+                android:textColor="#555555"/>
+                
+            <!-- Botón oculto o secundario si se requiere acción explícita -->
+            <Button
+                android:id="@+id/btnWatchVideo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="VER VÍDEO"
+                style="@style/Style.FitMakers.Button.Small"
+                android:visibility="gone" 
+                /> 
+                <!-- Lo oculto por defecto porque la tarjeta entera debería ser clicable -->
+        </LinearLayout>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

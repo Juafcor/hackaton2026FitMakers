@@ -11,7 +11,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/dark_blue"
-        android:padding="16dp">
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingBottom="16dp"
+        android:paddingTop="60dp">
 
         <ImageButton
             android:id="@+id/btnBack"
@@ -20,7 +23,6 @@
             android:src="@android:drawable/ic_menu_revert"
             android:background="?attr/selectableItemBackgroundBorderless"
             app:tint="@color/white"
-            android:layout_centerVertical="true"
             android:layout_alignParentStart="true"
             android:contentDescription="Volver" />
 
@@ -28,11 +30,11 @@
             android:id="@+id/tvCommunityTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="EVENTOS"
-            android:textSize="20sp"
+            android:text="Eventos"
+            android:textSize="26sp"
             android:textStyle="bold"
-            android:textColor="@color/white"
-            android:layout_centerInParent="true"/>
+            style="@style/Style.FitMakers.Title"
+            android:layout_centerHorizontal="true"/>
     </RelativeLayout>
 
     <androidx.recyclerview.widget.RecyclerView
