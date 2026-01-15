@@ -1,5 +1,0 @@
-C:\Users\Usuario\OneDrive - Universidad Alfonso X el Sabio\hackaton2026\app\src\main\java\com\example\voicebiometry\SuccessActivity.kt
-C:\Users\Usuario\OneDrive - Universidad Alfonso X el Sabio\hackaton2026\app\src\main\java\com\example\voicebiometry\AudioHelper.kt
-C:\Users\Usuario\OneDrive - Universidad Alfonso X el Sabio\hackaton2026\app\src\main\java\com\example\voicebiometry\RegisterActivity.kt
-C:\Users\Usuario\OneDrive - Universidad Alfonso X el Sabio\hackaton2026\app\src\main\java\com\example\voicebiometry\MainActivity.kt
-C:\Users\Usuario\OneDrive - Universidad Alfonso X el Sabio\hackaton2026\app\src\main\java\com\example\voicebiometry\LoginActivity.kt

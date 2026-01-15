@@ -1,7 +1,7 @@
 package com.example.hackathonfitmakers
 
 data class Event(
-    val id: Int, // Número único del evento
+    val id: String, // String ID for Firestore document ID
     val title: String,
     val date: String,
     val location: String,

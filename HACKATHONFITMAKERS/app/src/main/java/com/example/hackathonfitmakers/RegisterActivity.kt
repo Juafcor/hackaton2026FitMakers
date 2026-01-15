@@ -11,7 +11,10 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
+import com.example.hackathonfitmakers.model.User
 import com.example.hackathonfitmakers.utils.BiometricHelper
+import com.example.hackathonfitmakers.utils.FirestoreHelper
+import org.json.JSONArray
 
 class RegisterActivity : AppCompatActivity() {
 
@@ -32,8 +35,7 @@ class RegisterActivity : AppCompatActivity() {
 
         // Initialize BiometricHelper
         biometricHelper = BiometricHelper(this) { status ->
-             // Optional: Display status in a Toast or Log if needed
-             // runOnUiThread { Toast.makeText(this, status, Toast.LENGTH_SHORT).show() }
+             // Optional: Display status
         }
         
         biometricHelper.setup {
@@ -81,14 +83,37 @@ class RegisterActivity : AppCompatActivity() {
 
         // Cuando pulsamos el botón de terminar registro
         btnFinish.setOnClickListener {
-            val name = etName.text.toString()
-            val dni = etDni.text.toString()
-            val password = etPassword.text.toString()
+            val name = etName.text.toString().trim()
+            val dni = etDni.text.toString().trim()
+            val password = etPassword.text.toString().trim()
+            
+            // New Fields
+            val weightStr = findViewById<EditText>(R.id.etWeight).text.toString().trim()
+            val heightStr = findViewById<EditText>(R.id.etHeight).text.toString().trim()
+            
+            // Sexo (RadioGroup)
+            val rgSex = findViewById<android.widget.RadioGroup>(R.id.rgSex)
+            val genderStr = when (rgSex.checkedRadioButtonId) {
+                R.id.rbMale -> "Hombre"
+                R.id.rbFemale -> "Mujer"
+                else -> ""
+            }
+
+            // Pathologies (CheckBoxes)
+            val cbUpper = findViewById<android.widget.CheckBox>(R.id.cbUpperBody)
+            val cbLower = findViewById<android.widget.CheckBox>(R.id.cbLowerBody)
+            val typePathologies = mutableListOf<String>()
+            if (cbUpper.isChecked) typePathologies.add("Superior")
+            if (cbLower.isChecked) typePathologies.add("Inferior")
+            
+            val street = findViewById<EditText>(R.id.etAddressStreet).text.toString().trim()
+            val num = findViewById<EditText>(R.id.etAddressNum).text.toString().trim()
+            val cp = findViewById<EditText>(R.id.etAddressCP).text.toString().trim()
 
             if (name.isEmpty() || dni.isEmpty() || password.isEmpty()) {
                 Toast.makeText(
                     this,
-                    "Please enter Name, DNI and Password",
+                    "Please fill in all main fields (Name, DNI, Pass)",
                     Toast.LENGTH_SHORT
                 ).show()
             } else if (capturedVector == null) {
@@ -98,24 +123,57 @@ class RegisterActivity : AppCompatActivity() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                // Save to SharedPreferences using DNI as Key
-                val prefs = getSharedPreferences("BiometricPrefs", MODE_PRIVATE)
-                val editor = prefs.edit()
-                editor.putString(dni, capturedVector)
-                editor.putString(dni + "_pass", password) // Save password with suffix
-                editor.apply()
+                // Parse captured vector string to List<Float>
+                val vozList = ArrayList<Float>()
+                try {
+                    val jsonArray = JSONArray(capturedVector)
+                    for (i in 0 until jsonArray.length()) {
+                        vozList.add(jsonArray.getDouble(i).toFloat())
+                    }
+                } catch (e: Exception) {
+                    Toast.makeText(this, "Error processing voice data", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
-                Toast.makeText(
-                    this,
-                    "¡Registro completado!",
-                    Toast.LENGTH_LONG
-                ).show()
+                // Prepare complex fields
+                val peso = weightStr.toIntOrNull() ?: 0
+                val altura = heightStr.toIntOrNull() ?: 0
+                val sexo = if (genderStr.isNotEmpty()) listOf(genderStr) else emptyList()
+                val patologias = typePathologies.toList()
+                
+                val residencia = hashMapOf<String, Any>(
+                    "calle" to street,
+                    "numero" to num,
+                    "cp" to cp
+                )
 
-                // Volvemos al menú principal (Login) y cerramos el registro
-                val intent = Intent(this, LoginActivity::class.java)
-                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
-                startActivity(intent)
-                finish()
+                val newUser = User(
+                    dni = dni,
+                    nombre = name,
+                    contrasena = password,
+                    peso = peso,
+                    altura = altura,
+                    sexo = sexo,
+                    patologias = patologias,
+                    residencia = residencia,
+                    voz = vozList
+                )
+
+                FirestoreHelper.addUser(newUser, onSuccess = {
+                    Toast.makeText(
+                        this,
+                        "¡Registro completado!",
+                        Toast.LENGTH_LONG
+                    ).show()
+
+                    // Volvemos al menú principal (Login) y cerramos el registro
+                    val intent = Intent(this, LoginActivity::class.java)
+                    intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP
+                    startActivity(intent)
+                    finish()
+                }, onFailure = { errorMsg ->
+                    Toast.makeText(this, "Error in registration: $errorMsg", Toast.LENGTH_SHORT).show()
+                })
             }
         }
     }
