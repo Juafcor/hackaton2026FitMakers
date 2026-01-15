@@ -34,14 +34,10 @@ class MainActivity : AppCompatActivity() {
             startActivity(Intent(this, IaActivity::class.java))
         }
 
-        // Cargar GIF con Glide
-        val ivAiLogo = findViewById<android.widget.ImageView>(R.id.ivAiLogo)
-        com.bumptech.glide.Glide.with(this).load(R.drawable.robot_anim).into(ivAiLogo)
-        
         // Botón para abrir la web de ejercicios
         btnWeb.setOnClickListener {
             // Abrimos el navegador con la web
-            val url = "https://www.tusitioweb.com/ejercicios"
+            val url = "https://web.mmolinero.cloud/"
 
             val intent = Intent(Intent.ACTION_VIEW)
             intent.data = Uri.parse(url)

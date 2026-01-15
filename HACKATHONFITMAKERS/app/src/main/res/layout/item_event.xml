@@ -29,9 +29,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Título del Evento"
-                    android:textSize="18sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/dark_blue"/>
+                    style="@style/Style.FitMakers.Subtitle"
+                    android:layout_marginBottom="4dp"
+                    android:textSize="25sp"
+                    android:gravity="start"/>
 
                 <TextView
                     android:id="@+id/tvItemEventDate"
@@ -39,7 +40,7 @@
                     android:layout_height="wrap_content"
                     android:text="Fecha: DD MMM | Hora: HH:MM"
                     android:layout_marginTop="4dp"
-                    android:textSize="14sp"
+                    style="@style/Style.FitMakers.Body"
                     android:textColor="@color/orange"
                     android:textStyle="bold"/>
 
@@ -49,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:text="Lugar: Ubicación"
                     android:textStyle="italic"
-                    android:textColor="#555555"
+                    style="@style/Style.FitMakers.Body"
                     android:layout_marginTop="2dp"
                     android:layout_marginBottom="8dp"/>
                  
@@ -58,8 +59,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Descripción del evento..."
-                    android:maxLines="3"
+                    android:maxLines="4"
                     android:ellipsize="end"
+                    style="@style/Style.FitMakers.Body"
                     android:textColor="#333333"/>
             </LinearLayout>
 

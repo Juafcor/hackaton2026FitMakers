@@ -46,12 +46,6 @@ class IndividualActivity : AppCompatActivity() {
 
         dayViews = listOf(tvMon, tvTue, tvWed, tvThu, tvFri)
 
-        // Boton volver
-        val btnBack = findViewById<android.widget.ImageButton>(R.id.btnBack)
-        btnBack.setOnClickListener {
-            finish()
-        }
-
         // 3. Al pulsar un día, cambiamos la selección
         tvMon.setOnClickListener { selectDay(tvMon, "Lunes") }
         tvTue.setOnClickListener { selectDay(tvTue, "Martes") }
@@ -75,7 +69,7 @@ class IndividualActivity : AppCompatActivity() {
 
         // Al día seleccionado le ponemos estilo naranja y texto blanco
         selectedView.setBackgroundResource(R.drawable.bg_input_rounded)
-        selectedView.background.setTint(ContextCompat.getColor(this, R.color.orange))
+        selectedView.background.mutate().setTint(ContextCompat.getColor(this, R.color.orange))
         selectedView.setTextColor(Color.WHITE)
 
         // Mostramos la rutina de ese día
@@ -112,26 +106,50 @@ class IndividualActivity : AppCompatActivity() {
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
         val dialog = builder.create()
+        
+        // Fondo transparente para bordes redondeados
+        dialog.window?.setBackgroundDrawableResource(android.R.color.transparent)
 
         val tvTitle = dialogView.findViewById<TextView>(R.id.tvPopupTitle)
         val videoView = dialogView.findViewById<VideoView>(R.id.vvPopup)
         val btnClose = dialogView.findViewById<Button>(R.id.btnClosePopup)
+        // val btnFullscreen = dialogView.findViewById<android.widget.ImageButton>(R.id.btnFullscreen) 
+        // Commenting out btnFullscreen if ID not found, check xml if needed. Assuming it exists based on previous file view.
 
         tvTitle.text = exercise.title
 
+        val videoPath = "android.resource://" + packageName + "/" + exercise.videoResId
+        val uri = Uri.parse(videoPath)
+        
         try {
-            val videoPath = "android.resource://" + packageName + "/" + exercise.videoResId
-            val uri = Uri.parse(videoPath)
             videoView.setVideoURI(uri)
 
             val mediaController = MediaController(this)
             mediaController.setAnchorView(videoView)
             videoView.setMediaController(mediaController)
 
-            videoView.start()
+            videoView.setOnPreparedListener { mp ->
+                mp.start()
+            }
+            
+            videoView.setOnErrorListener { _, what, extra ->
+                Toast.makeText(this, "Error reproduciendo video ($what, $extra)", Toast.LENGTH_SHORT).show()
+                true
+            }
+            
         } catch (e: Exception) {
-            Toast.makeText(this, "Error video: ${e.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Error iniciando video: ${e.message}", Toast.LENGTH_SHORT).show()
         }
+
+        /* 
+        // Comprobar si FullscreenVideoActivity existe antes de habilitar este botón
+        btnFullscreen.setOnClickListener {
+            val intent = android.content.Intent(this, FullscreenVideoActivity::class.java)
+            intent.putExtra("VIDEO_URL", videoPath)
+            startActivity(intent)
+            videoView.pause()
+        }
+        */
 
         btnClose.setOnClickListener { dialog.dismiss() }
         dialog.show()

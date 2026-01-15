@@ -5,26 +5,28 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="@android:color/white">
+    android:fitsSystemWindows="true"
+    android:background="@color/dark_blue">
 
     <LinearLayout
         android:id="@+id/llRegisterContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:padding="24dp"
+        android:paddingTop="60dp">
 
         <TextView
             android:id="@+id/tvRegisterTitle"
+            style="@style/Style.FitMakers.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Registro"
-            style="@style/Style.FitMakers.Title" />
+            android:layout_marginBottom="16dp"
+            android:text="Registro" />
 
-        <!-- Grupo de campos de texto -->
         <TextView
             android:text="Nombre completo :"
-            style="@style/Style.FitMakers.Label"
+            style="@style/Style.FitMakers.Label.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp" />
@@ -38,7 +40,7 @@
 
         <TextView
             android:text="Edad :"
-            style="@style/Style.FitMakers.Label"
+            style="@style/Style.FitMakers.Label.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp" />
@@ -52,7 +54,7 @@
 
         <TextView
             android:text="DNI :"
-            style="@style/Style.FitMakers.Label"
+            style="@style/Style.FitMakers.Label.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp" />
@@ -65,8 +67,22 @@
             android:inputType="text" />
 
         <TextView
+            android:text="Contraseña :"
+            style="@style/Style.FitMakers.Label.White"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp" />
+
+        <EditText
+            android:id="@+id/etPasswordRegister"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            style="@style/Style.FitMakers.Input"
+            android:inputType="textPassword" />
+
+        <TextView
             android:text="Altura :"
-            style="@style/Style.FitMakers.Label"
+            style="@style/Style.FitMakers.Label.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp" />
@@ -76,11 +92,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Style.FitMakers.Input"
-            android:inputType="numberDecimal" />
+            android:inputType="number" />
 
         <TextView
             android:text="Peso :"
-            style="@style/Style.FitMakers.Label"
+            style="@style/Style.FitMakers.Label.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp" />
@@ -90,14 +106,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             style="@style/Style.FitMakers.Input"
-            android:inputType="numberDecimal" />
+            android:inputType="number" />
 
         <TextView
             android:id="@+id/tvSexLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Sexo :"
-            style="@style/Style.FitMakers.Label"
+            style="@style/Style.FitMakers.Label.White"
             android:layout_marginTop="10dp" />
 
         <RadioGroup
@@ -134,36 +150,70 @@
                 android:text="Mujer" />
         </RadioGroup>
 
+        <!-- Address Separated Fields (Original Logic) -->
         <TextView
             android:text="Dirección :"
-            style="@style/Style.FitMakers.Label"
+            style="@style/Style.FitMakers.Label.White"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp" />
 
         <EditText
-            android:id="@+id/etAddress"
+            android:id="@+id/etAddressStreet"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:hint="Calle / Avenida"
+            android:textColorHint="#CCCCCC"
             style="@style/Style.FitMakers.Input"
-            android:inputType="textPostalAddress" />
+            android:inputType="textPostalAddress" 
+            android:layout_marginBottom="8dp"/>
 
+         <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginBottom="8dp">
+            
+            <EditText
+                android:id="@+id/etAddressNum"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginEnd="8dp"
+                android:hint="Número"
+                android:textColorHint="#CCCCCC"
+                style="@style/Style.FitMakers.Input"
+                android:inputType="number"/>
+
+            <EditText
+                android:id="@+id/etAddressCP"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="8dp"
+                android:hint="C. Postal"
+                android:textColorHint="#CCCCCC"
+                style="@style/Style.FitMakers.Input"
+                android:inputType="number"/>
+        </LinearLayout>
+
+
+        <!-- Pathologies (Original Logic - CheckBox) with New Style -->
         <TextView
             android:id="@+id/tvPathologyLabel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Patología :"
             android:layout_marginTop="15dp"
-            style="@style/Style.FitMakers.Label" />
+            style="@style/Style.FitMakers.Label.White" />
 
-        <RadioGroup
-            android:id="@+id/rgPathology"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <RadioButton
-                android:id="@+id/rbUpperBody"
+            <CheckBox
+                android:id="@+id/cbUpperBody"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -174,8 +224,8 @@
                 android:padding="8dp"
                 android:text="Superior" />
 
-            <RadioButton
-                android:id="@+id/rbLowerBody"
+            <CheckBox
+                android:id="@+id/cbLowerBody"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
@@ -185,9 +235,8 @@
                 android:textColor="@color/dark_blue"
                 android:padding="8dp"
                 android:text="Inferior" />
-        </RadioGroup>
+        </LinearLayout>
 
-        <!-- Botón del micrófono (Decorativo por ahora) -->
         <ImageButton
             android:id="@+id/btnMicRegister"
             android:layout_width="48dp"
@@ -200,7 +249,7 @@
             android:padding="8dp"
             android:contentDescription="Grabar voz"
             android:layout_marginBottom="24dp"
-            app:tint="@color/dark_blue" />
+            app:tint="@color/white" />
 
         <Button
             android:id="@+id/btnFinishRegister"

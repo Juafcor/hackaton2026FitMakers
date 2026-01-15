@@ -3,25 +3,33 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="8dp">
+    android:paddingStart="8dp"
+    android:paddingEnd="8dp"
+    android:paddingTop="4dp"
+    android:paddingBottom="4dp">
 
     <TextView
         android:id="@+id/text_message_name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sender Name"
-        android:textSize="12sp"
+        android:text="Nombre"
+        style="@style/Style.FitMakers.Label.Blue"
+        android:textSize="14sp"
         android:textColor="#757575"
-        android:layout_marginBottom="2dp" />
+        android:layout_marginBottom="4dp"
+        android:layout_marginStart="4dp"/>
 
     <TextView
         android:id="@+id/text_message_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:padding="12dp"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        android:background="#2196F3" 
-        android:layout_marginBottom="4dp"/>
+        android:text="Mensaje de ejemplo"
+        style="@style/Style.FitMakers.Body"
+        android:padding="16dp"
+        android:textColor="@color/dark_blue"
+        android:textSize="20sp"
+        android:background="@drawable/bg_message_received"
+        android:layout_marginBottom="8dp"
+        android:maxWidth="320dp"/>
 
 </LinearLayout>

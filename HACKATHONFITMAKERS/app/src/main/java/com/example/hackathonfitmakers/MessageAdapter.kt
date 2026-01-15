@@ -29,14 +29,16 @@ class MessageAdapter(private val messages: List<Message>) : RecyclerView.Adapter
         
         if (message.isUser) {
             holder.container.gravity = Gravity.END
+            holder.messageText.setBackgroundResource(R.drawable.bg_message_sent)
+            holder.messageText.setTextColor(Color.WHITE)
             holder.nameText.text = "Tú"
             holder.nameText.gravity = Gravity.END
-            holder.messageText.setBackgroundColor(Color.parseColor("#2196F3")) // Blue for user
         } else {
             holder.container.gravity = Gravity.START
+            holder.messageText.setBackgroundResource(R.drawable.bg_message_received)
+            holder.messageText.setTextColor(androidx.core.content.ContextCompat.getColor(holder.itemView.context, R.color.dark_blue))
             holder.nameText.text = "IA Assistant"
             holder.nameText.gravity = Gravity.START
-            holder.messageText.setBackgroundColor(Color.parseColor("#4CAF50")) // Green for bot
         }
     }
 

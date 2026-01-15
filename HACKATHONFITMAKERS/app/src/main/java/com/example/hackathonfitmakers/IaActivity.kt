@@ -3,129 +3,86 @@ package com.example.hackathonfitmakers
 import android.content.Intent
 import android.os.Bundle
 import android.speech.tts.TextToSpeech
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.ai.client.generativeai.GenerativeModel
+import kotlinx.coroutines.launch
 import java.util.Locale
 
-class IaActivity : AppCompatActivity(), TextToSpeech.OnInitListener {
+class IaActivity : AppCompatActivity() {
 
     private lateinit var tts: TextToSpeech
     private lateinit var adapter: MessageAdapter
     private val messages = mutableListOf<Message>()
-    private var scriptIndex = 0
-    
-    // RESPUESTAS PREPARADAS
-    private val script = listOf(
-        "Hola, soy un chatbot creado para el Hackathon.",
-        "Hoy es martes, 14 de enero de 2026.",
-        "¡Muy bien, gracias! 😊 ¿Y tú qué tal estás hoy?",
-        "Lo siento 😕. Descansa, pon hielo y evita forzarla. Si no mejora o se inflama mucho, consulta al médico.",
-        "Sí, te ayudo: entra en el apartado de trabajo individual de la app para empezar.",
-        "¡De nada! 😊"
-    )
+    private lateinit var generativeModel: GenerativeModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_ia)
 
-        // Initialize TextToSpeech
-        tts = TextToSpeech(this, this)
+        // Initialize Gemini
+        generativeModel = GenerativeModel(
+             modelName = "gemini-2.5-flash",
+             apiKey = "AIzaSyAcTFlDWSJRN43yGKBB70HG7R1GEJbMfls" // TODO: Replace with your actual API Key or retrieve from BuildConfig
+        )
 
-        val recyclerView = findViewById<RecyclerView>(R.id.recycler_gchat)
-        val editMessage = findViewById<EditText>(R.id.edit_gchat_message)
         val btnSend = findViewById<Button>(R.id.button_gchat_send)
-        // Ensure we find the views, even if casted generally
+        val etMessage = findViewById<EditText>(R.id.edit_gchat_message)
+        val recycler = findViewById<RecyclerView>(R.id.recycler_gchat)
         val btnHome = findViewById<ImageButton>(R.id.btn_home)
         val btnInfo = findViewById<ImageButton>(R.id.btn_info)
 
+        adapter = MessageAdapter(messages)
+        recycler.layoutManager = LinearLayoutManager(this).apply {
+             stackFromEnd = true
+        }
+        recycler.adapter = adapter
+
+        // Initial welcome message
+        addMessage(Message("¡Hola! Soy tu asistente IA. ¿En qué puedo ayudarte hoy?", false))
+
+        btnSend.setOnClickListener {
+            val userText = etMessage.text.toString()
+            if (userText.isNotBlank()) {
+                // 1. Show user message
+                addMessage(Message(userText, true))
+                etMessage.setText("")
+
+                // 2. Call AI
+                lifecycleScope.launch {
+                    try {
+                        val response = generativeModel.generateContent(userText)
+                        response.text?.let { output ->
+                            addMessage(Message(output, false))
+                        }
+                    } catch (e: Exception) {
+                        Log.e("IaActivity", "Error generating content", e)
+                        addMessage(Message("Lo siento, hubo un error al conectar con la IA.", false))
+                    }
+                }
+            }
+        }
+
         btnHome.setOnClickListener {
-            // Debug feedback
-            Toast.makeText(this, "Volviendo al menú...", Toast.LENGTH_SHORT).show()
-            
-            val intent = Intent(this, MainActivity::class.java)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
-            startActivity(intent)
             finish()
         }
 
         btnInfo.setOnClickListener {
-            // Debug feedback
-            Toast.makeText(this, "Mostrando información...", Toast.LENGTH_SHORT).show()
-            
-            android.app.AlertDialog.Builder(this)
-                .setTitle("Información")
-                .setMessage("Este asistente virtual está aquí para ayudarte. Escribe tu consulta y recibirás una respuesta.")
-                .setPositiveButton("Entendido", null)
-                .show()
+             Toast.makeText(this, "Gemini 2.5 Flash Chatbot", Toast.LENGTH_SHORT).show()
         }
-
-        adapter = MessageAdapter(messages)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this).apply {
-            stackFromEnd = false 
-        }
-
-        // Show first message
-        val initialAnswer = getNextAnswer()
-        addMessage(Message(initialAnswer, false))
-
-        btnSend.setOnClickListener {
-            val text = editMessage.text.toString()
-            if (text.isNotEmpty()) {
-                addMessage(Message(text, true))
-                editMessage.text.clear()
-
-                val answer = getNextAnswer()
-                addMessage(Message(answer, false))
-                
-                speak(answer)
-                
-                if (messages.size > 0) {
-                     recyclerView.smoothScrollToPosition(messages.size - 1)
-                }
-            }
-        }
+        
     }
 
     private fun addMessage(message: Message) {
         messages.add(message)
         adapter.notifyItemInserted(messages.size - 1)
-    }
-
-    private fun getNextAnswer(): String {
-        if (script.isEmpty()) return "..."
-        val answer = script[scriptIndex]
-        scriptIndex = (scriptIndex + 1) % script.size
-        return answer
-    }
-
-    override fun onInit(status: Int) {
-        if (status == TextToSpeech.SUCCESS) {
-            val result = tts.setLanguage(Locale("es", "ES"))
-            if (result == TextToSpeech.LANG_MISSING_DATA || result == TextToSpeech.LANG_NOT_SUPPORTED) {
-                 // Handle error
-            } else {
-                if (messages.isNotEmpty() && !messages.last().isUser) {
-                    speak(messages.last().content)
-                }
-            }
-        }
-    }
-    
-    private fun speak(text: String) {
-        tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
-    }
-
-    override fun onDestroy() {
-        if (::tts.isInitialized) {
-            tts.stop()
-            tts.shutdown()
-        }
-        super.onDestroy()
+        findViewById<RecyclerView>(R.id.recycler_gchat).scrollToPosition(messages.size - 1)
     }
 }

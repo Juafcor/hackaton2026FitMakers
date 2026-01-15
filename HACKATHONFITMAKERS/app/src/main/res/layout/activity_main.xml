@@ -5,29 +5,25 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:padding="16dp"
-    android:background="@android:color/white">
+    android:background="@color/dark_blue"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingBottom="16dp"
+    android:paddingTop="60dp"> 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-         android:gravity="center_vertical"
-         android:layout_marginBottom="24dp">
-         <ImageView
-             android:layout_width="40dp"
-             android:layout_height="40dp"
-             android:src="@drawable/ic_launcher_foreground" 
-             android:backgroundTint="@color/dark_blue"/>
+        android:layout_marginBottom="24dp"
+        android:orientation="horizontal">
+
         <TextView
             android:id="@+id/tvMainTitle"
+            style="@style/Style.FitMakers.Title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="MENÚ PRINCIPAL"
-             android:textSize="20sp"
-             android:textStyle="bold"
-             android:textColor="@color/dark_blue"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:text="MENÚ PRINCIPAL" />
     </LinearLayout>
 
     <GridLayout
@@ -40,14 +36,13 @@
         android:columnOrderPreserved="false"
         android:useDefaultMargins="true">
 
-        <!-- Item 1: Individual Plan -->
         <androidx.cardview.widget.CardView
             android:id="@+id/btnIndividual"
-             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
             style="@style/Style.FitMakers.Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/white">
             <LinearLayout
                 android:layout_width="match_parent"
@@ -55,109 +50,102 @@
                 android:gravity="center"
                 android:orientation="vertical">
                 <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/ic_menu_individual"
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/individualpng"
                     android:layout_marginBottom="16dp"/>
                 <TextView
+                    style="@style/Style.FitMakers.Label.Blue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Mi Plan Individual"
+                    android:text="Mi Plan\nIndividual"
                     android:textAlignment="center"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/dark_blue"/>
+                    android:textSize="21sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-            <!-- Opción 2: Comunidad -->
         <androidx.cardview.widget.CardView
             android:id="@+id/btnCommunity"
-             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
             style="@style/Style.FitMakers.Card"
-            app:cardBackgroundColor="@color/white">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:gravity="center"
-                 android:orientation="vertical">
-                <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/ic_menu_community"
-                     android:layout_marginBottom="16dp"/>
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Comunidad y Eventos"
-                    android:textAlignment="center"
-                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/dark_blue"/>
-            </LinearLayout>
-        </androidx.cardview.widget.CardView>
-
-            <!-- Opción 3: Entrenador IA -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/btnAI"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_columnWeight="1"
             android:layout_rowWeight="1"
-            style="@style/Style.FitMakers.Card"
+            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/white">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                 android:orientation="vertical">
+                android:orientation="vertical">
                 <ImageView
-                    android:id="@+id/ivAiLogo"
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/robot_anim"
-                     android:layout_marginBottom="16dp"/>
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/comunidad"
+                    android:layout_marginBottom="16dp"/>
                 <TextView
+                    style="@style/Style.FitMakers.Label.Blue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Asistente IA"
+                    android:text="Comunidad\ny Eventos"
                     android:textAlignment="center"
-                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/dark_blue"/>
+                    android:textSize="21sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 
-            <!-- Opción 4: Web Ejercicios -->
         <androidx.cardview.widget.CardView
-            android:id="@+id/btnWeb"
-             android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_columnWeight="1"
-            android:layout_rowWeight="1"
+            android:id="@+id/btnAI"
             style="@style/Style.FitMakers.Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
             app:cardBackgroundColor="@color/white">
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
-                 android:orientation="vertical">
+                android:orientation="vertical">
                 <ImageView
-                    android:layout_width="64dp"
-                    android:layout_height="64dp"
-                    android:src="@drawable/ic_menu_web"
-                     android:layout_marginBottom="16dp"/>
+                    android:id="@+id/ivAiLogo"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:src="@drawable/robot_animacion"
+                    android:layout_marginBottom="16dp"/>
                 <TextView
+                    style="@style/Style.FitMakers.Label.Blue"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Web Ejercicios Cognitivos"
+                    android:text="Asistente\nIA"
                     android:textAlignment="center"
-                     android:textSize="16sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/dark_blue"/>
+                    android:textSize="21sp"/>
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btnWeb"
+            style="@style/Style.FitMakers.Card"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_rowWeight="1"
+            android:layout_columnWeight="1"
+            app:cardBackgroundColor="@color/white">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="130dp"
+                    android:src="@drawable/cognitivo"
+                    android:layout_marginBottom="16dp"/>
+                <TextView
+                    style="@style/Style.FitMakers.Label.Blue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Web Ejercicios\nCognitivos"
+                    android:textAlignment="center"
+                    android:textSize="21sp"/>
             </LinearLayout>
         </androidx.cardview.widget.CardView>
 

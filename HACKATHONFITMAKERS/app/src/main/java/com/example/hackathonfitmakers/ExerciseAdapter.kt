@@ -29,8 +29,14 @@ class ExerciseAdapter(
         holder.tvTitle.text = item.title
         holder.tvDesc.text = item.description
 
+        // El botón puede estar oculto, así que hacemos clicable toda la tarjeta
+        holder.itemView.setOnClickListener {
+            onVideoClick(item)
+        }
+        
+        // Mantenemos el listener en el botón por si acaso se vuelve visible en el futuro
         holder.btnVideo.setOnClickListener {
-            onVideoClick(item) // Avisamos que han pulsado el video
+            onVideoClick(item)
         }
     }
 
