@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import com.example.hackathonfitmakers.utils.BiometricHelper
+import com.example.hackathonfitmakers.utils.FirestoreHelper
 
 class LoginActivity : AppCompatActivity() {
 
@@ -45,20 +46,19 @@ class LoginActivity : AppCompatActivity() {
             val pass = etPassword.text.toString().trim()
 
             if (dni.isNotEmpty() && pass.isNotEmpty()) {
-                // Verify against stored password
-                val prefs = getSharedPreferences("BiometricPrefs", MODE_PRIVATE)
-                val storedPassword = prefs.getString(dni + "_pass", null)
-
-                if (storedPassword == null) {
-                    Toast.makeText(this, "User not registered", Toast.LENGTH_SHORT).show()
-                } else if (storedPassword == pass) {
-                     // Success via Password
-                     val intent = Intent(this, MainActivity::class.java)
-                     startActivity(intent)
-                     finish()
-                } else {
-                     Toast.makeText(this, "Incorrect Password", Toast.LENGTH_SHORT).show()
-                }
+                FirestoreHelper.getUser(dni, onSuccess = { user ->
+                    if (user.contrasena == pass) {
+                         // Success via Password
+                         getSharedPreferences("BiometricPrefs", MODE_PRIVATE).edit().putString("current_user_dni", dni).apply()
+                         val intent = Intent(this, MainActivity::class.java)
+                         startActivity(intent)
+                         finish()
+                    } else {
+                         Toast.makeText(this, "Incorrect Password", Toast.LENGTH_SHORT).show()
+                    }
+                }, onFailure = { error ->
+                    Toast.makeText(this, "Error: $error", Toast.LENGTH_SHORT).show()
+                })
             } else {
                 Toast.makeText(this, "Introduce DNI y contraseña", Toast.LENGTH_SHORT).show()
             }
@@ -79,17 +79,6 @@ class LoginActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            // Retrieve stored vector
-            val prefs = getSharedPreferences("BiometricPrefs", MODE_PRIVATE)
-            val storedVector = prefs.getString(dni, null)
-
-            if (storedVector == null) {
-                Toast.makeText(this, "User not found or no voice registered", Toast.LENGTH_SHORT).show()
-                return@setOnClickListener
-            }
-            
-            // NOTE: We do NOT need password here, as voice is an alternative.
-
             if (isRecording) {
                  biometricHelper.stopListening()
                  isRecording = false
@@ -97,41 +86,60 @@ class LoginActivity : AppCompatActivity() {
                  return@setOnClickListener
             }
 
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
-                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 1)
-                 return@setOnClickListener
-            }
+            // Verify user exists first to get their vector
+            FirestoreHelper.getUser(dni, onSuccess = { user ->
+                // Check if user has voice data
+                if (user.voz.isEmpty()) {
+                    Toast.makeText(this, "User has no voice data registered", Toast.LENGTH_SHORT).show()
+                    return@getUser
+                }
 
-            isRecording = true
-            btnMic.setColorFilter(android.graphics.Color.RED)
-            Toast.makeText(this, "Listening for verification...", Toast.LENGTH_SHORT).show()
+                // Start recording
+                if (ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                     ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.RECORD_AUDIO), 1)
+                     return@getUser
+                }
 
-            biometricHelper.startRecording(object : BiometricHelper.BiometricListener {
-                override fun onSpeakerVectorExtracted(vector: String) {
-                    runOnUiThread {
-                        val similarity = BiometricHelper.calculateCosineSimilarity(storedVector, vector)
-                        isRecording = false
-                        btnMic.setColorFilter(null) // Reset
-                        
-                        // Threshold 0.45 as per sample
+                isRecording = true
+                btnMic.setColorFilter(android.graphics.Color.RED)
+                Toast.makeText(this, "Listening for verification...", Toast.LENGTH_SHORT).show()
+
+                biometricHelper.startRecording(object : BiometricHelper.BiometricListener {
+                    override fun onSpeakerVectorExtracted(vector: String) {
+                        runOnUiThread {
+                            // user.voz is List<Float>. Convert to String format "[1.0, 2.0...]"
+                            val storedVectorStr = user.voz.toString()
+                            
+                            val similarity = BiometricHelper.calculateCosineSimilarity(storedVectorStr, vector)
+                            isRecording = false
+                            btnMic.setColorFilter(null) // Reset
+                            
+                            // Threshold 0.45 as per sample
                         if (similarity > 0.45) {
+                            val prefs = getSharedPreferences("BiometricPrefs", MODE_PRIVATE)
+                            prefs.edit().putString("current_user_dni", dni).apply()
+                            
                             Toast.makeText(this@LoginActivity, "Voice Verified! Score: %.2f".format(similarity), Toast.LENGTH_SHORT).show()
                             val intent = Intent(this@LoginActivity, MainActivity::class.java)
                             startActivity(intent)
                             finish()
                         } else {
-                            Toast.makeText(this@LoginActivity, "Access Denied. Score: %.2f".format(similarity), Toast.LENGTH_LONG).show()
+                                Toast.makeText(this@LoginActivity, "Access Denied. Score: %.2f".format(similarity), Toast.LENGTH_LONG).show()
+                            }
                         }
                     }
-                }
 
-                override fun onError(message: String) {
-                    runOnUiThread {
-                        isRecording = false
-                        btnMic.setColorFilter(null) // Reset
-                        Toast.makeText(this@LoginActivity, "Error: $message", Toast.LENGTH_SHORT).show()
+                    override fun onError(message: String) {
+                        runOnUiThread {
+                            isRecording = false
+                            btnMic.setColorFilter(null) // Reset
+                            Toast.makeText(this@LoginActivity, "Error: $message", Toast.LENGTH_SHORT).show()
+                        }
                     }
-                }
+                })
+
+            }, onFailure = { error ->
+                Toast.makeText(this, "User lookup failed: $error", Toast.LENGTH_SHORT).show()
             })
         }
     }

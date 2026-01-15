@@ -14,6 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.hackathonfitmakers.utils.FirestoreHelper
 
 class IndividualActivity : AppCompatActivity() {
 
@@ -52,15 +53,17 @@ class IndividualActivity : AppCompatActivity() {
             finish()
         }
 
-        // 3. Al pulsar un día, cambiamos la selección
+        // Setup the listeners and load default day immediately
+        setupDayListeners()
+        selectDay(tvMon, "Lunes")
+    }
+
+    private fun setupDayListeners() {
         tvMon.setOnClickListener { selectDay(tvMon, "Lunes") }
         tvTue.setOnClickListener { selectDay(tvTue, "Martes") }
         tvWed.setOnClickListener { selectDay(tvWed, "Miercoles") }
         tvThu.setOnClickListener { selectDay(tvThu, "Jueves") }
         tvFri.setOnClickListener { selectDay(tvFri, "Viernes") }
-
-        // Seleccionamos el Lunes al entrar
-        selectDay(tvMon, "Lunes")
     }
 
     // Función que marca el día elegido y carga sus ejercicios
@@ -83,28 +86,58 @@ class IndividualActivity : AppCompatActivity() {
     }
 
     private fun cargarRutinaPorDia(dia: String) {
-        val listaEjercicios = when (dia) {
-            "Lunes" -> listOf(
-                Exercise("1. Sentadillas Silla", "3 series de 10.", R.raw.ejemplo_video),
-                Exercise("2. Elevación Frontal", "Sube los brazos.", R.raw.video_martes),
-                Exercise("3. Marcha estática", "Levanta rodillas.", R.raw.ejemplo_video)
+        // Fetch up to 3 exercises for the day
+        FirestoreHelper.getExercisesForDay(dia, onSuccess = { exercisesData ->
+            val listaEjercicios = mutableListOf<Exercise>()
+            
+            // Available local videos for exercises
+            val availableVideos = listOf(
+                R.raw.ejemplo_video, 
+                R.raw.video_martes
             )
-            "Martes" -> listOf(
-                Exercise("1. Flexiones pared", "Flexiona codos.", R.raw.video_martes),
-                Exercise("2. Apertura pecho", "Abre brazos.", R.raw.ejemplo_video)
-            )
-            // Agrega lógica para Miercoles, Jueves, Viernes...
-            else -> emptyList()
-        }
 
-        val exerciseAdapter = ExerciseAdapter(listaEjercicios) { exercise ->
-            showVideoPopup(exercise)
-        }
-        rvExercises.adapter = exerciseAdapter
+            for ((index, data) in exercisesData.withIndex()) {
+                 val title = data["titulo"] as? String ?: "Exercise"
+                 val desc = data["descripcion"] as? String ?: ""
+                 
+                 // Assign video round-robin style
+                 val videoResId = availableVideos[index % availableVideos.size]
+                 
+                 listaEjercicios.add(Exercise(title, desc, videoResId))
+            }
 
-        if (listaEjercicios.isEmpty()) {
-            Toast.makeText(this, "Día libre: $dia", Toast.LENGTH_SHORT).show()
-        }
+            val exerciseAdapter = ExerciseAdapter(listaEjercicios) { exercise ->
+                showVideoPopup(exercise)
+            }
+            rvExercises.adapter = exerciseAdapter
+
+            if (listaEjercicios.isEmpty()) {
+                // If fetching Lunes fails (likely first time), offer to seed data
+                if (dia == "Lunes") {
+                   AlertDialog.Builder(this)
+                       .setTitle("No hay rutinas")
+                       .setMessage("La base de datos de ejercicios parece vacía. ¿Quieres generar rutinas de prueba para toda la semana?")
+                       .setPositiveButton("Sí, Generar") { _, _ ->
+                           Toast.makeText(this, "Generando ejercicios...", Toast.LENGTH_SHORT).show()
+                           FirestoreHelper.seedExercises(
+                               onSuccess = {
+                                   Toast.makeText(this, "¡Datos generados! Recargando...", Toast.LENGTH_SHORT).show()
+                                   cargarRutinaPorDia(dia)
+                               },
+                               onFailure = { error ->
+                                   Toast.makeText(this, "Error generando datos: $error", Toast.LENGTH_SHORT).show()
+                               }
+                           )
+                       }
+                       .setNegativeButton("No", null)
+                       .show()
+                } else {
+                    Toast.makeText(this, "No routine found for $dia", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }, onFailure = { e ->
+            Toast.makeText(this, "Error loading exercises: $e", Toast.LENGTH_SHORT).show()
+        })
     }
 
     private fun showVideoPopup(exercise: Exercise) {
